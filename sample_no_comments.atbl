@@ -1,0 +1,10 @@
+ver 1
+row
+cel
+txt The first cell of the first row
+hex 10
+txt contains a line break.
+cel
+txt The second cell of the first row
+    also contains a line break.
+row

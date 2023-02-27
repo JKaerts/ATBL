@@ -1,0 +1,58 @@
+ver 1
+rem This file samples every bit of the ATBL syntax. Any line that starts with
+rem 'rem' is a comment and will be ignored by the parser. The previous line
+rem specifies the version of ATBL that this file uses.
+
+rem Empty lines are also ignored by the parser. But enough about what the parser
+rem ignores. Let's start building our table. We start construction of the first
+rem row by using the 'row' command:
+
+row
+
+rem Our table now contains a single empty row. If the file were to end here,
+rem that would be all the table contains. Using the 'cel' command, we add an
+rem empty cell to the current row:
+
+cel
+
+rem To fill our cell with data, we have two options. The first option is to
+rem insert UTF-8 text with the 'txt'-command:
+
+txt The first cell of the first row
+
+rem The argument to the 'txt' command can be any valid UTF-8 text not containing
+rem line feeds. This is because the parser splits commands based on line feeds.
+rem After executing a 'txt' command, the argument is converted to bytes and
+rem appended to the current cell. If we want a cell that contains line feeds, we
+rem can use the second way of entering data: the 'hex' command:
+
+hex 10
+
+rem The command 'hex' takes a string of hexadecimal digits, converts that string
+rem into bytes and appends it to the current cell. Let's add some more text to
+rem the cell and start working on a new one:
+
+txt contains a line break.
+cel
+
+rem The only other 'command' that needs explaining, is the continuation line.
+rem Typing 'hex 10' every time you want a line feed in your cell contents gets
+rem old fast. That is why there is a way to 'continue' a 'txt' command to the
+rem next line. After a 'txt' command, indent the next line with four spaces to
+rem insert a line feed:
+
+txt The second cell of the first row
+    also contains a line break.
+
+rem The reason I called this mechanism a 'command' is because internally the
+rem parser converts a line starting with four spaces into a 'txt' command which
+rem inserts a line feed before its actual argument.
+
+rem Our first row is now finished and contains the two cells defined above.
+rem Let's start working on the second one. This will be a short endeavour
+rem because we'll make this an empty row:
+
+row
+
+rem The table now contains two rows of differing lengths. This is allowed. ATBL
+rem only cares about a 'list of lists of byte arrays'.
