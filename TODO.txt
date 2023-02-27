@@ -1,0 +1,3 @@
+- Clear up CR/LF in README
+- Refactor README into actual docs
+- Document example parser
